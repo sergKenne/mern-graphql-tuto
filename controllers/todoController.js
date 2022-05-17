@@ -39,20 +39,32 @@ const createTodo = (req, res) => {
         })
 }
 
-const updateTodo =  async(req, res) => {
-    const todo = await Todo.findOne({ id: req.params.id });
-    todo.title = req.body.title;
-    todo.description = req.body.description;
+const updateTodo = async (req, res) => {
     
-    todo.save((err, todo) => {
-        if (err) {
-            return res.json(err.message)
-        }
+    try {
+        const todo = await Todo.findByIdAndUpdate(req.params.id, req.body);
         res.status(200).json({
             msg: 'todo updated successfully',
             todo,
         });
-    })
+
+    } catch (err) {
+        return res.json(err.message);
+    }
+    
+    // const todo = await Todo.findOne({ id: req.params.id });
+    // todo.title = req.body.title;
+    // todo.description = req.body.description;
+    
+    // todo.save((err, todo) => {
+    //     if (err) {
+    //         return res.json(err.message)
+    //     }
+    //     res.status(200).json({
+    //         msg: 'todo updated successfully',
+    //         todo,
+    //     });
+    // })
 }
 
 const deleteTodo = (req, res) => {
