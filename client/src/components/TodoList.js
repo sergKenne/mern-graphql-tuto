@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import React from 'react'
-import { GET_ALL_TODO } from '../graphql';
+import { GET_ALL_TODO } from '../graphql/query';
 import Cart from './Cart';
 import Loading from './Loading';
 

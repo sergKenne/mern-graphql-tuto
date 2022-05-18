@@ -1,9 +1,20 @@
+import { useMutation } from '@apollo/client'
 import React from 'react'
+import { DELETE_TODO } from '../graphql/mutation'
 
 const Cart = ({ todo }) => {
     const { title, description, id } = todo
+    const [removeTodo] = useMutation(DELETE_TODO)
     const deleteTodo = (id) => {
         console.log("id:", id)
+        removeTodo({
+            variables: {
+                id: id
+            }
+        }).then(({ data }) => {
+            console.log(data);
+            window.location.reload();
+        })
     }
   return (
       <div className="card">
